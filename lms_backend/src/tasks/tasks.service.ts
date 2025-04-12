@@ -1,4 +1,74 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Task } from './entities/task.entity';
+import { CreateTaskDto } from './dtos/create.dto';
+import { UpdateTaskDto } from './dtos/update.dto';
+import { User } from '../users/entities/user.entity';
+import { FilterTasksDto } from './dtos/filter.dto';
 
 @Injectable()
-export class TasksService {}
+export class TasksService {
+  constructor(
+    @InjectRepository(Task)
+    private tasksRepository: Repository<Task>,
+  ) {}
+
+  async create(createTaskDto: CreateTaskDto, user:User): Promise<Task> {
+
+    
+    const newTask = this.tasksRepository.create({
+        title: createTaskDto.title,
+        description: createTaskDto.description,
+        dueDate: createTaskDto.dueDate,
+        priority: createTaskDto.priority || 'medium',//here i did this as default value 
+        status: 'pending',
+        user: {id : user.id}
+      });
+
+      return this.tasksRepository.save(newTask);
+  }
+
+  async findAll(filterDto: FilterTasksDto, user: User): Promise<{ data: Task[]; total: number }> {
+    const { status, page = 1, limit = 10 } = filterDto;
+
+    const query = this.tasksRepository.createQueryBuilder('task');
+  
+    query.where({ user });
+  
+    if (status) {
+      query.andWhere('task.status = :status', { status });
+    }
+  
+    const [data, total] = await query
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getManyAndCount();
+  
+    return { data, total };
+  }
+  
+
+  async markAsComplete(id: number, user: User): Promise<Task> {
+    const task = await this.tasksRepository.findOne({
+      where: { id, user: { id: user.id } },
+    });
+    if (!task) {
+      throw new NotFoundException(`Task with ID ${id} not found`);
+    }
+    task.status = 'completed';
+    return this.tasksRepository.save(task);
+  }
+
+  async remove(id: number, user: User): Promise<any> {
+   
+      const result = await this.tasksRepository.delete({ id, user: { id: user.id } });
+      
+      if (result.affected === 0) {
+        throw new NotFoundException(`Task with ID ${id} not found`);
+      }else{
+        return {message:"sucessful remove"}
+      }
+    
+  }
+}

@@ -1,43 +1,39 @@
-version: '3.8'
-##ai helped also here with env vars setups
+version: '3.5'
+
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: task_postgres
+  db:
+    image: postgres
+    restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: task_management
+      - POSTGRES_PASSWORD=verySecrert_passXD
+    container_name: postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      - '5432:5432'
 
   app:
-    build: .
+    build: ./lms_backend  # Build the Dockerfile inside the lms_backend folder
     container_name: lms_backend
     depends_on:
-      postgres:
-        condition: service_healthy
-    environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: task_management
-      JWT_SECRET: yoursupersecretkey
-      NODE_ENV: development
+      - db
+    env_file:
+      - ./lms_backend/docker.env
     ports:
-      - "5000:5000"
+      - "5000:5000"  # Expose port 5000 from the container to the host
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-    command: npm run start:dev
+      - ./lms_backend:/usr/src/app  # Mount the local lms_backend directory to the container
+      - /usr/src/app/node_modules  # Bind mount node_modules directory to avoid potential issues
+    command: npm run start:dev  # Run the app in development mode
 
-volumes:
-  postgres_data:
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: nest-pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin4
+    ports:
+      - '5050:80'
+    depends_on:
+      - db
