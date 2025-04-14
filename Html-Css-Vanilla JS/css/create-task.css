@@ -1,0 +1,130 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+header a:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+main {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+#createTaskForm .form-group {
+    margin-bottom: 1.5rem;
+}
+
+#createTaskForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+#createTaskForm input[type="text"],
+#createTaskForm input[type="date"],
+#createTaskForm textarea,
+#createTaskForm select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+#createTaskForm textarea {
+    resize: vertical;
+}
+
+#createTaskForm button[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    display: block; 
+    width: 100%;
+    margin-top: 1rem;
+}
+#createTaskForm button[type="submit"]:hover {
+     background-color: #4cae4c;
+}
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    color: #777;
+    font-size: 0.9em;
+}
+
+.error-message {
+    color: #d9534f;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success-message {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    main {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+     header h1 {
+        font-size: 1.5rem;
+    }
+    header a {
+        padding: 0.4rem 0.8rem;
+    }
+    main {
+         padding: 1rem;
+    }
+}

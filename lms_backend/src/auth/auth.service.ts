@@ -36,7 +36,7 @@ export class AuthService {
             if (error.code === '23505') {
               throw new ForbiddenException('Credentials taken');
             }
-            return { error: 'Internal server error', msg: error.message };
+            
           }
     
   }
@@ -56,8 +56,7 @@ export class AuthService {
     
         return { message: "successful Login",access_token };
       } catch (err) {
-        console.error('Error during login process:', err);
-        return { error: 'Internal server error', msg: err.message };
+        throw new UnauthorizedException('Login failed');
       }
   }
 

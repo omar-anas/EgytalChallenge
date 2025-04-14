@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Task</title>
+    <link rel="stylesheet" href="../css/create-task.css">
+     </head>
+<body>
+    <header>
+        <h1>Create New Task</h1>
+        <a href="main.html">Back to Tasks</a>
+    </header>
+
+    <main>
+        <form id="createTaskForm">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate" name="dueDate">
+            </div>
+            <div class="form-group">
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <button type="submit">Create Task</button>
+            <p id="errorMessage" class="error-message" style="display: none;"></p>
+            <p id="successMessage" class="success-message" style="display: none;"></p>
+        </form>
+    </main>
+
+    <footer>
+         <p>&copy; 2025 Task Manager</p>
+    </footer>
+    <script src="../js/create-task.js"></script>
+</body>
+</html>

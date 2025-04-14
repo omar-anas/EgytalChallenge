@@ -6,6 +6,7 @@ import { CreateTaskDto } from './dtos/create.dto';
 import { UpdateTaskDto } from './dtos/update.dto';
 import { User } from '../users/entities/user.entity';
 import { FilterTasksDto } from './dtos/filter.dto';
+import { stat } from 'fs';
 
 @Injectable()
 export class TasksService {
@@ -16,6 +17,7 @@ export class TasksService {
 
   async create(createTaskDto: CreateTaskDto, user:User): Promise<Task> {
 
+    
     
     const newTask = this.tasksRepository.create({
         title: createTaskDto.title,
@@ -29,7 +31,7 @@ export class TasksService {
       return this.tasksRepository.save(newTask);
   }
 
-  async findAll(filterDto: FilterTasksDto, user: User): Promise<{ data: Task[]; total: number }> {
+  async findAll(filterDto: FilterTasksDto, user: User): Promise<{ tasks: Task[]; total: number }> {
     const { status, page = 1, limit = 10 } = filterDto;
 
     const query = this.tasksRepository.createQueryBuilder('task');
@@ -45,18 +47,19 @@ export class TasksService {
       .take(limit)
       .getManyAndCount();
   
-    return { data, total };
+    return { tasks:data, total };
   }
   
 
-  async markAsComplete(id: number, user: User): Promise<Task> {
+  async markAsComplete(id: number, user: User , status:string): Promise<Task> {
+    console.log(id , status); 
     const task = await this.tasksRepository.findOne({
       where: { id, user: { id: user.id } },
     });
     if (!task) {
       throw new NotFoundException(`Task with ID ${id} not found`);
     }
-    task.status = 'completed';
+    task.status = status;
     return this.tasksRepository.save(task);
   }
 

@@ -22,9 +22,9 @@ export class TasksController {
     return this.tasksService.findAll(filterDto, user);
   }
 
-  @Patch(':id/complete')
-  markAsComplete(@Param('id') id: string, @GetUser() user: User) {
-    return this.tasksService.markAsComplete(+id, user);
+  @Patch(':id/status')
+  markAsComplete(@Param('id') id: string, @GetUser() user: User ,@Body() body:{status:string}) {
+    return this.tasksService.markAsComplete(+id, user,body.status);
   }
 
   @Delete(':id')
