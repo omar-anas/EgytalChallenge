@@ -21,7 +21,7 @@ this is a quick demo of how to start and test the components
 The repository includes self-contained files with complete database schemas and example queries:
 
 - `LMS_Dump_SelfContainedFile` - MYSQL database schema and sample data
-- `LMS_Dynmo_SingleTableDesign` - DynamoDB single-table design implementation
+- `Library_MS.json` - DynamoDB single-table design implementation
 
 ## 🚀 Getting Started
 
