@@ -1,0 +1,118 @@
+/* src/assets/auth-form.css */
+
+.auth-container {
+    background-color: #fff;
+    padding: 2.5rem 2rem; /* More padding */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Limit width */
+    text-align: center;
+    margin: 3rem auto; /* Add vertical margin too */
+    box-sizing: border-box;
+}
+
+.auth-container h1 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.auth-container .form-group {
+    margin-bottom: 1.2rem;
+    text-align: left; /* Align labels left */
+}
+
+.auth-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.auth-container input[type="text"],
+.auth-container input[type="email"],
+.auth-container input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding/border in width */
+    font-size: 1rem;
+}
+.auth-container input:focus {
+    border-color: #5cb85c; /* Highlight on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(92, 184, 92, 0.5);
+}
+
+.auth-container button[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    display: block; /* Make button take full width */
+    width: 100%;
+    margin-top: 1.5rem;
+    transition: background-color 0.2s ease;
+}
+.auth-container button[type="submit"]:hover:not(:disabled) {
+    background-color: #4cae4c;
+}
+.auth-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+.auth-container p {
+    margin-top: 1.5rem;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.auth-container a {
+    color: #5cb85c;
+    text-decoration: none;
+    font-weight: bold;
+}
+.auth-container a:hover {
+    text-decoration: underline;
+}
+
+/* Shared error/success message styles */
+.error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+.success-message {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 2rem 1.5rem;
+        margin: 1rem; /* Reduce margin on small screens */
+    }
+    .auth-container h1 {
+        font-size: 1.8rem;
+    }
+}
