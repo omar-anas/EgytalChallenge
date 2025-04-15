@@ -1,0 +1,178 @@
+{
+  "ModelName": "Library_Ms",
+  "ModelMetadata": {
+    "Author": "Omar",
+    "DateCreated": "Apr 13, 2025, 12:28 PM",
+    "DateLastModified": "Apr 15, 2025, 06:44 PM",
+    "Description": "Egytall Challenge - Optimized",
+    "AWSService": "Amazon DynamoDB",
+    "Version": "3.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "LibraryManagement",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "PK",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "SK",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "GSI1PK",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "GSI1SK",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Type",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "title",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "author",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "isbn",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "available",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "name",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "email",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "join_date",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "user_id",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "book_id",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "loan_date",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "due_date",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "status",
+          "AttributeType": "S"
+        }
+      ],
+      "TableFacets": [
+        {
+          "FacetName": "User",
+          "TableData": [],
+          "DataAccess": {
+            "MySql": {}
+          }
+        },
+        {
+          "FacetName": "Book",
+          "TableData": [],
+          "DataAccess": {
+            "MySql": {}
+          }
+        },
+        {
+          "FacetName": "Loan",
+          "TableData": [],
+          "DataAccess": {
+            "MySql": {}
+          }
+        },
+        {
+          "FacetName": "BookLoan",
+          "TableData": [],
+          "DataAccess": {
+            "MySql": {}
+          }
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "UserLoansIndex",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "GSI1PK",
+              "AttributeType": "S"
+            },
+            "SortKey": {
+              "AttributeName": "GSI1SK",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "ALL"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      },
+      "SampleDataFormats": {
+        "User": {
+          "PK": "USER#1",
+          "SK": "USER#1",
+          "Type": "User",
+          "name": "John Doe",
+          "email": "john@example.com",
+          "join_date": "2025-01-01"
+        },
+        "Book": {
+          "PK": "BOOK#101",
+          "SK": "BOOK#101",
+          "Type": "Book",
+          "title": "DynamoDB Design Patterns",
+          "author": "Alex DeBrie",
+          "isbn": "1234567890",
+          "available": true
+        },
+        "Loan": {
+          "PK": "LOAN#1001",
+          "SK": "LOAN#1001",
+          "GSI1PK": "USER#1",
+          "GSI1SK": "LOAN_DATE#2025-04-01",
+          "Type": "Loan",
+          "user_id": "1",
+          "book_id": "101",
+          "loan_date": "2025-04-01",
+          "due_date": "2025-05-01",
+          "status": "ACTIVE"
+        },
+        "BookLoan": {
+          "PK": "BOOK#101",
+          "SK": "LOAN#1001",
+          "Type": "BookLoan",
+          "user_id": "1",
+          "loan_date": "2025-04-01"
+        }
+      },
+      "BillingMode": "PAY_PER_REQUEST"
+    }
+  ]
+}
